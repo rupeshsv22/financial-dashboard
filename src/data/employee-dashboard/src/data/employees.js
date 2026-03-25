@@ -1,0 +1,9 @@
+const employees = [
+  { id: 1, firstName: "John", lastName: "Doe", email: "john.doe@example.com", department: "Engineering", position: "Software Engineer", salary: 80000, hireDate: "2020-01-15", age: 30, location: "New York", performanceRating: 4.5, projectsCompleted: 5, isActive: true, skills: ["JavaScript", "React", "Node.js"], manager: "Jane Smith" },
+  { id: 2, firstName: "Alice", lastName: "Johnson", email: "alice.johnson@example.com", department: "Marketing", position: "Marketing Manager", salary: 90000, hireDate: "2019-03-22", age: 35, location: "San Francisco", performanceRating: 4.7, projectsCompleted: 8, isActive: true, skills: ["SEO", "Content Marketing", "Social Media"], manager: "Bob Brown" },
+  { id: 3, firstName: "Bob", lastName: "Williams", email: "bob.williams@example.com", department: "Sales", position: "Sales Representative", salary: 60000, hireDate: "2021-06-10", age: 28, location: "Chicago", performanceRating: 4.0, projectsCompleted: 3, isActive: true, skills: ["Negotiation", "CRM", "Customer Service"], manager: "Alice Johnson" },
+  { id: 4, firstName: "Charlie", lastName: "Brown", email: "charlie.brown@example.com", department: "HR", position: "HR Specialist", salary: 55000, hireDate: "2022-02-01", age: 26, location: "Los Angeles", performanceRating: 4.2, projectsCompleted: 2, isActive: true, skills: ["Recruitment", "Employee Relations", "Training"], manager: "Jane Smith" },
+  { id: 5, firstName: "Diana", lastName: "Prince", email: "diana.prince@example.com", department: "Engineering", position: "DevOps Engineer", salary: 85000, hireDate: "2020-08-15", age: 32, location: "Seattle", performanceRating: 4.6, projectsCompleted: 6, isActive: true, skills: ["AWS", "Docker", "Kubernetes"], manager: "John Doe" },
+];
+
+export default employees;

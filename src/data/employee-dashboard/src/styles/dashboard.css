@@ -1,0 +1,68 @@
+/employee-dashboard/employee-dashboard/src/styles/dashboard.css
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard-header {
+    background-color: #4a90e2;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.dashboard-title {
+    font-size: 2em;
+    margin: 0;
+}
+
+.employee-grid {
+    margin: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.ag-theme-alpine {
+    --ag-header-background-color: #4a90e2;
+    --ag-header-foreground-color: white;
+    --ag-background-color: white;
+    --ag-odd-row-background-color: #f9f9f9;
+    --ag-row-hover-color: #f1f1f1;
+    --ag-selected-row-background-color: #e0e0e0;
+    --ag-border-color: #d0d0d0;
+}
+
+.kpi-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.kpi-accent {
+    height: 5px;
+    width: 100%;
+    background: #4a90e2;
+    border-radius: 4px 4px 0 0;
+}
+
+.kpi-label {
+    font-size: 14px;
+    color: #666;
+}
+
+.kpi-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.kpi-sub {
+    font-size: 12px;
+    color: #999;
+}

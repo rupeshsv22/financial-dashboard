@@ -4,201 +4,98 @@ import { ModuleRegistry, AllCommunityModule } from "ag-grid-community";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 
-// register AG Grid community modules once
 ModuleRegistry.registerModules([AllCommunityModule]);
 
-const transactions = [
-  { id: "TXN-001", date: "2024-03-01", description: "AWS Cloud Services",        category: "Infrastructure", amount: -4820.50,  status: "Settled", account: "Operations",  merchant: "Amazon Web Services" },
-  { id: "TXN-002", date: "2024-03-02", description: "Client Payment – Orion Corp",category: "Revenue",       amount: 28500.00,  status: "Settled", account: "Receivables", merchant: "Orion Corporation" },
-  { id: "TXN-003", date: "2024-03-03", description: "Office Lease – March",       category: "Facilities",    amount: -6200.00,  status: "Settled", account: "Operations",  merchant: "Meridian Properties" },
-  { id: "TXN-004", date: "2024-03-04", description: "Payroll Processing Fee",     category: "HR & Payroll",  amount: -340.00,   status: "Settled", account: "Payroll",     merchant: "ADP" },
-  { id: "TXN-005", date: "2024-03-05", description: "Software Licenses – Adobe",  category: "Software",      amount: -1240.00,  status: "Settled", account: "Operations",  merchant: "Adobe Systems" },
-  { id: "TXN-006", date: "2024-03-06", description: "Client Payment – Bluewave",  category: "Revenue",       amount: 15750.00,  status: "Pending", account: "Receivables", merchant: "Bluewave Technologies" },
-  { id: "TXN-007", date: "2024-03-07", description: "Travel – SFO Conference",    category: "Travel",        amount: -2190.00,  status: "Settled", account: "Expenses",    merchant: "Amex Corporate" },
-  { id: "TXN-008", date: "2024-03-08", description: "Digital Marketing – Google", category: "Marketing",     amount: -3600.00,  status: "Settled", account: "Marketing",   merchant: "Google LLC" },
-  { id: "TXN-009", date: "2024-03-10", description: "Equipment Purchase – Monitors",category:"Equipment",    amount: -5400.00,  status: "Settled", account: "CapEx",       merchant: "Dell Technologies" },
-  { id: "TXN-010", date: "2024-03-11", description: "Client Retainer – NovaStar", category: "Revenue",       amount: 9800.00,   status: "Settled", account: "Receivables", merchant: "NovaStar Media" },
-  { id: "TXN-011", date: "2024-03-12", description: "Insurance Premium – Q1",     category: "Insurance",     amount: -2850.00,  status: "Settled", account: "Operations",  merchant: "Chubb Group" },
-  { id: "TXN-012", date: "2024-03-13", description: "Contractor Invoice – Dev",   category: "Contractors",   amount: -8500.00,  status: "Pending", account: "Payroll",     merchant: "Freelancer Portal" },
-  { id: "TXN-013", date: "2024-03-14", description: "Client Payment – Helios",    category: "Revenue",       amount: 42000.00,  status: "Settled", account: "Receivables", merchant: "Helios Ventures" },
-  { id: "TXN-014", date: "2024-03-15", description: "Utilities – March",          category: "Facilities",    amount: -980.00,   status: "Settled", account: "Operations",  merchant: "Pacific Gas & Electric" },
-  { id: "TXN-015", date: "2024-03-18", description: "Slack – Team Plan",          category: "Software",      amount: -420.00,   status: "Settled", account: "Operations",  merchant: "Slack Technologies" },
-  { id: "TXN-016", date: "2024-03-19", description: "Client Payment – Apex",      category: "Revenue",       amount: 19200.00,  status: "Failed",  account: "Receivables", merchant: "Apex Financial" },
-  { id: "TXN-017", date: "2024-03-20", description: "Business Meals – Q1 Team",  category: "Meals & Ent.",  amount: -1560.00,  status: "Settled", account: "Expenses",    merchant: "Expensify" },
-  { id: "TXN-018", date: "2024-03-21", description: "Legal Retainer – March",     category: "Legal",         amount: -4500.00,  status: "Settled", account: "Operations",  merchant: "Morrison & Foerster" },
-  { id: "TXN-019", date: "2024-03-25", description: "Client Bonus – Quarterly",   category: "Revenue",       amount: 5500.00,   status: "Pending", account: "Receivables", merchant: "Internal Transfer" },
-  { id: "TXN-020", date: "2024-03-28", description: "R&D Subscription – GitHub",  category: "Software",      amount: -840.00,   status: "Settled", account: "Engineering", merchant: "GitHub Inc." },
+const employees = [
+  { id: 1, firstName: "John", lastName: "Smith", email: "john.smith@company.com", department: "Engineering", position: "Senior Developer", salary: 95000, hireDate: "2021-03-15", age: 32, location: "New York", performanceRating: 4.2, projectsCompleted: 12, isActive: true, skills: ["JavaScript", "React", "Node.js"], manager: "Sarah Johnson" },
+  { id: 2, firstName: "Emily", lastName: "Davis", email: "emily.davis@company.com", department: "Marketing", position: "Marketing Manager", salary: 78000, hireDate: "2020-07-22", age: 29, location: "Los Angeles", performanceRating: 4.5, projectsCompleted: 8, isActive: true, skills: ["Digital Marketing", "SEO", "Analytics"], manager: "Michael Brown" },
+  { id: 3, firstName: "Michael", lastName: "Brown", email: "michael.brown@company.com", department: "Marketing", position: "VP Marketing", salary: 125000, hireDate: "2019-01-10", age: 38, location: "Los Angeles", performanceRating: 4.7, projectsCompleted: 15, isActive: true, skills: ["Strategy", "Leadership", "Brand Management"], manager: null },
+  { id: 4, firstName: "Sarah", lastName: "Johnson", email: "sarah.johnson@company.com", department: "Engineering", position: "Engineering Manager", salary: 115000, hireDate: "2018-11-05", age: 35, location: "New York", performanceRating: 4.6, projectsCompleted: 18, isActive: true, skills: ["Team Leadership", "Architecture", "Python"], manager: "David Wilson" },
+  { id: 5, firstName: "David", lastName: "Wilson", email: "david.wilson@company.com", department: "Engineering", position: "CTO", salary: 180000, hireDate: "2017-05-12", age: 42, location: "New York", performanceRating: 4.8, projectsCompleted: 25, isActive: true, skills: ["Technical Strategy", "Leadership", "Cloud Architecture"], manager: null },
+  { id: 6, firstName: "Lisa", lastName: "Garcia", email: "lisa.garcia@company.com", department: "Sales", position: "Sales Representative", salary: 65000, hireDate: "2022-02-28", age: 26, location: "Chicago", performanceRating: 3.9, projectsCompleted: 6, isActive: true, skills: ["CRM", "Negotiation", "Customer Relations"], manager: "Robert Martinez" },
+  { id: 7, firstName: "Robert", lastName: "Martinez", email: "robert.martinez@company.com", department: "Sales", position: "Sales Manager", salary: 92000, hireDate: "2020-09-14", age: 34, location: "Chicago", performanceRating: 4.3, projectsCompleted: 11, isActive: true, skills: ["Sales Strategy", "Team Management", "B2B Sales"], manager: "Jennifer Lee" },
+  { id: 8, firstName: "Jennifer", lastName: "Lee", email: "jennifer.lee@company.com", department: "Sales", position: "VP Sales", salary: 135000, hireDate: "2019-06-18", age: 40, location: "Chicago", performanceRating: 4.6, projectsCompleted: 16, isActive: true, skills: ["Strategic Sales", "Leadership", "Market Analysis"], manager: null },
+  { id: 9, firstName: "James", lastName: "Anderson", email: "james.anderson@company.com", department: "HR", position: "HR Specialist", salary: 58000, hireDate: "2021-08-30", age: 28, location: "Austin", performanceRating: 4.0, projectsCompleted: 7, isActive: true, skills: ["Recruitment", "Employee Relations", "HRIS"], manager: "Karen White" },
+  { id: 10, firstName: "Karen", lastName: "White", email: "karen.white@company.com", department: "HR", position: "HR Manager", salary: 85000, hireDate: "2019-12-02", age: 36, location: "Austin", performanceRating: 4.4, projectsCompleted: 13, isActive: true, skills: ["HR Strategy", "Policy Development", "Leadership"], manager: null },
+  { id: 11, firstName: "Alex", lastName: "Thompson", email: "alex.thompson@company.com", department: "Engineering", position: "Junior Developer", salary: 72000, hireDate: "2023-01-16", age: 24, location: "New York", performanceRating: 3.8, projectsCompleted: 4, isActive: true, skills: ["Java", "Spring Boot", "MySQL"], manager: "Sarah Johnson" },
+  { id: 12, firstName: "Maria", lastName: "Rodriguez", email: "maria.rodriguez@company.com", department: "Finance", position: "Financial Analyst", salary: 68000, hireDate: "2021-11-08", age: 30, location: "Miami", performanceRating: 4.1, projectsCompleted: 9, isActive: true, skills: ["Financial Modeling", "Excel", "SAP"], manager: "Thomas Clark" },
+  { id: 13, firstName: "Thomas", lastName: "Clark", email: "thomas.clark@company.com", department: "Finance", position: "Finance Manager", salary: 98000, hireDate: "2018-04-25", age: 37, location: "Miami", performanceRating: 4.5, projectsCompleted: 14, isActive: true, skills: ["Financial Planning", "Budget Management", "Leadership"], manager: null },
+  { id: 14, firstName: "Amanda", lastName: "Taylor", email: "amanda.taylor@company.com", department: "Marketing", position: "Content Specialist", salary: 55000, hireDate: "2022-06-12", age: 25, location: "Los Angeles", performanceRating: 3.7, projectsCompleted: 5, isActive: true, skills: ["Content Writing", "Social Media", "Adobe Creative"], manager: "Michael Brown" },
+  { id: 15, firstName: "Ryan", lastName: "Miller", email: "ryan.miller@company.com", department: "Engineering", position: "DevOps Engineer", salary: 88000, hireDate: "2020-10-19", age: 31, location: "Seattle", performanceRating: 4.3, projectsCompleted: 10, isActive: true, skills: ["AWS", "Docker", "Kubernetes"], manager: "Sarah Johnson" },
+  { id: 16, firstName: "Jessica", lastName: "Moore", email: "jessica.moore@company.com", department: "Sales", position: "Account Executive", salary: 75000, hireDate: "2021-04-03", age: 27, location: "Denver", performanceRating: 4.0, projectsCompleted: 8, isActive: false, skills: ["Account Management", "Salesforce", "Presentation"], manager: "Robert Martinez" },
+  { id: 17, firstName: "Daniel", lastName: "Harris", email: "daniel.harris@company.com", department: "Finance", position: "Senior Accountant", salary: 73000, hireDate: "2019-08-14", age: 33, location: "Miami", performanceRating: 4.2, projectsCompleted: 12, isActive: true, skills: ["Accounting", "Tax Preparation", "QuickBooks"], manager: "Thomas Clark" },
+  { id: 18, firstName: "Nicole", lastName: "Jackson", email: "nicole.jackson@company.com", department: "HR", position: "Recruiter", salary: 62000, hireDate: "2022-09-05", age: 29, location: "Austin", performanceRating: 3.9, projectsCompleted: 6, isActive: true, skills: ["Talent Acquisition", "LinkedIn Recruiter", "Interviewing"], manager: "Karen White" },
+  { id: 19, firstName: "Kevin", lastName: "Wright", email: "kevin.wright@company.com", department: "Engineering", position: "QA Engineer", salary: 76000, hireDate: "2020-12-07", age: 30, location: "Seattle", performanceRating: 4.1, projectsCompleted: 11, isActive: true, skills: ["Test Automation", "Selenium", "API Testing"], manager: "Sarah Johnson" },
+  { id: 20, firstName: "Stephanie", lastName: "Lopez", email: "stephanie.lopez@company.com", department: "Marketing", position: "Digital Marketing Specialist", salary: 64000, hireDate: "2021-12-20", age: 26, location: "Phoenix", performanceRating: 3.8, projectsCompleted: 7, isActive: true, skills: ["Google Ads", "Facebook Ads", "Email Marketing"], manager: "Michael Brown" },
 ];
 
-const STATUS_CONFIG = {
-  Settled: { color: "#16a34a", bg: "#f0fdf4", border: "#bbf7d0" },
-  Pending: { color: "#d97706", bg: "#fffbeb", border: "#fde68a" },
-  Failed:  { color: "#dc2626", bg: "#fef2f2", border: "#fecaca" },
+const deptColor = {
+  Engineering: "#2563EB", // blue
+  Marketing: "#EC4899",   // pink
+  Sales: "#10B981",       // emerald
+  HR: "#F59E0B",          // amber
+  Finance: "#8B5CF6",     // violet
 };
 
-const CATEGORY_COLORS = {
-  Revenue:       "#16a34a",
-  Infrastructure:"#2563eb",
-  Software:      "#7c3aed",
-  Facilities:    "#ea580c",
-  "HR & Payroll":"#9333ea",
-  Travel:        "#0891b2",
-  Marketing:     "#db2777",
-  Equipment:     "#64748b",
-  Insurance:     "#ca8a04",
-  Contractors:   "#c2410c",
-  Legal:         "#1e40af",
-  "Meals & Ent.":"#b45309",
-};
-
-// ── Custom Cell Renderers ──────────────────────────────────────────────
-
-function AmountRenderer({ value }) {
-  const isCredit = value > 0;
-  const formatted = new Intl.NumberFormat("en-US", {
-    style: "currency", currency: "USD", minimumFractionDigits: 2,
-  }).format(Math.abs(value));
+function NameRenderer({ data }) {
+  const full = `${data.firstName} ${data.lastName}`;
+  const initials = `${data.firstName[0]}${data.lastName[0]}`.toUpperCase();
   return (
-    <span style={{
-      fontFamily: "'DM Mono', monospace",
-      fontWeight: 600,
-      fontSize: 13,
-      color: isCredit ? "#16a34a" : "#dc2626",
-      letterSpacing: "-0.01em",
-    }}>
-      {isCredit ? "+" : "−"}{formatted}
-    </span>
-  );
-}
-
-function StatusRenderer({ value }) {
-  const cfg = STATUS_CONFIG[value] || STATUS_CONFIG.Settled;
-  return (
-    <span style={{
-      display: "inline-flex", alignItems: "center", gap: 5,
-      fontSize: 11.5, fontWeight: 500,
-      padding: "3px 10px", borderRadius: 20,
-      background: cfg.bg, color: cfg.color,
-      border: `1px solid ${cfg.border}`,
-    }}>
-      <span style={{ width: 6, height: 6, borderRadius: "50%", background: cfg.color, flexShrink: 0 }} />
-      {value}
-    </span>
-  );
-}
-
-function CategoryRenderer({ value }) {
-  const color = CATEGORY_COLORS[value] || "#64748b";
-  return (
-    <span style={{
-      fontSize: 11.5, fontWeight: 500,
-      padding: "3px 9px", borderRadius: 6,
-      background: color + "18",
-      color: color,
-      border: `1px solid ${color}30`,
-    }}>
-      {value}
-    </span>
-  );
-}
-
-function DescriptionRenderer({ value, data }) {
-  return (
-    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", lineHeight: 1.3, padding: "4px 0" }}>
-      <span style={{ fontSize: 13, fontWeight: 500, color: "#111827" }}>{value}</span>
-      <span style={{ fontSize: 11.5, color: "#9ca3af", marginTop: 2 }}>{data.merchant}</span>
+    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+      <span style={{ width: 28, height: 28, borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center", background: "linear-gradient(135deg,#4f46e5,#7c3aed)", color: "#fff", fontSize: 11, fontWeight: 700 }}>
+        {initials}
+      </span>
+      <span style={{ fontWeight: 600 }}>{full}</span>
     </div>
   );
 }
-
-function IdRenderer({ value }) {
-  return (
-    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 12, color: "#6b7280" }}>
-      {value}
-    </span>
-  );
+function SalaryRenderer({ value }) {
+  return <span style={{ fontWeight: 700 }}>{new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(value)}</span>;
 }
-
+function ActiveRenderer({ value }) {
+  const ok = !!value;
+  return <span style={{ padding: "3px 10px", borderRadius: 999, fontSize: 12, border: `1px solid ${ok ? "#bbf7d0" : "#fecaca"}`, background: ok ? "#f0fdf4" : "#fef2f2", color: ok ? "#166534" : "#991b1b" }}>{ok ? "Active" : "Inactive"}</span>;
+}
+function DepartmentRenderer({ value }) {
+  const c = deptColor[value] || "#64748b";
+  return <span style={{ fontSize: 12, fontWeight: 600, padding: "3px 10px", borderRadius: 999, background: `${c}1A`, color: c, border: `1px solid ${c}33` }}>{value}</span>;
+}
+function RatingRenderer({ value }) {
+  const v = Number(value || 0);
+  const stars = "★".repeat(Math.round(v)) + "☆".repeat(5 - Math.round(v));
+  return <span style={{ color: "#f59e0b", fontWeight: 600 }}>{stars} <span style={{ color: "#6b7280" }}>({v.toFixed(1)})</span></span>;
+}
 function DateRenderer({ value }) {
-  const formatted = new Date(value + "T00:00:00").toLocaleDateString("en-US", {
-    month: "short", day: "numeric", year: "numeric",
-  });
-  return <span style={{ fontSize: 12.5, color: "#6b7280" }}>{formatted}</span>;
+  return <span style={{ color: "#6b7280" }}>{new Date(`${value}T00:00:00`).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>;
 }
-
-// ── Main Dashboard ─────────────────────────────────────────────────────
 
 export default function App() {
   const gridRef = useRef();
   const [quickFilter, setQuickFilter] = useState("");
-  const [rowCount, setRowCount] = useState(transactions.length);
+  const [rowCount, setRowCount] = useState(employees.length);
 
   const stats = useMemo(() => {
-    const income  = transactions.filter(t => t.amount > 0).reduce((s, t) => s + t.amount, 0);
-    const expense = transactions.filter(t => t.amount < 0).reduce((s, t) => s + Math.abs(t.amount), 0);
-    return { income, expense, net: income - expense, count: transactions.length };
+    const totalPayroll = employees.reduce((s, e) => s + e.salary, 0);
+    const active = employees.filter((e) => e.isActive).length;
+    const avg = employees.reduce((s, e) => s + e.performanceRating, 0) / employees.length;
+    return { totalPayroll, active, avg, count: employees.length };
   }, []);
 
-  const fmt = (n) => new Intl.NumberFormat("en-US", {
-    style: "currency", currency: "USD", minimumFractionDigits: 2,
-  }).format(Math.abs(n));
-
   const columnDefs = useMemo(() => [
-    {
-      field: "id",
-      headerName: "TXN ID",
-      width: 108,
-      pinned: "left",
-      cellRenderer: IdRenderer,
-      filter: "agTextColumnFilter",
-    },
-    {
-      field: "date",
-      headerName: "Date",
-      width: 130,
-      cellRenderer: DateRenderer,
-      filter: "agDateColumnFilter",
-      sort: "asc",
-    },
-    {
-      field: "description",
-      headerName: "Description",
-      flex: 1,
-      minWidth: 220,
-      cellRenderer: DescriptionRenderer,
-      filter: "agTextColumnFilter",
-      autoHeight: true,
-    },
-    {
-      field: "category",
-      headerName: "Category",
-      width: 148,
-      cellRenderer: CategoryRenderer,
-      filter: "agTextColumnFilter",
-    },
-    {
-      field: "account",
-      headerName: "Account",
-      width: 120,
-      filter: "agTextColumnFilter",
-      cellStyle: { fontSize: "12.5px", color: "#6b7280" },
-    },
-    {
-      field: "status",
-      headerName: "Status",
-      width: 120,
-      cellRenderer: StatusRenderer,
-      filter: "agTextColumnFilter",
-    },
-    {
-      field: "amount",
-      headerName: "Amount",
-      width: 140,
-      cellRenderer: AmountRenderer,
-      filter: "agNumberColumnFilter",
-      type: "numericColumn",
-      pinned: "right",
-    },
+    { field: "id", width: 90, pinned: "left" },
+    { headerName: "Name", minWidth: 220, cellRenderer: NameRenderer, filter: "agTextColumnFilter" },
+    { field: "email", minWidth: 240 },
+    { field: "department", width: 140, cellRenderer: DepartmentRenderer },
+    { field: "position", minWidth: 180 },
+    { field: "salary", width: 140, cellRenderer: SalaryRenderer, filter: "agNumberColumnFilter", type: "numericColumn" },
+    { field: "hireDate", headerName: "Hire Date", width: 140, cellRenderer: DateRenderer, filter: "agDateColumnFilter" },
+    { field: "age", width: 90, filter: "agNumberColumnFilter" },
+    { field: "location", width: 120 },
+    { field: "performanceRating", headerName: "Rating", minWidth: 170, cellRenderer: RatingRenderer, filter: "agNumberColumnFilter" },
+    { field: "projectsCompleted", headerName: "Projects", width: 110, filter: "agNumberColumnFilter" },
+    { field: "isActive", headerName: "Status", width: 120, cellRenderer: ActiveRenderer },
+    { field: "manager", width: 170, valueFormatter: (p) => p.value || "—" },
+    { field: "skills", minWidth: 220, valueFormatter: (p) => (p.value || []).join(", ") },
   ], []);
 
   const defaultColDef = useMemo(() => ({
@@ -206,244 +103,182 @@ export default function App() {
     resizable: true,
     filter: true,
     floatingFilter: true,
-    suppressMovable: false,
   }), []);
 
   const onFilterChanged = useCallback(() => {
-    if (gridRef.current?.api) {
-      setRowCount(gridRef.current.api.getDisplayedRowCount());
-    }
+    if (gridRef.current?.api) setRowCount(gridRef.current.api.getDisplayedRowCount());
   }, []);
 
   const onQuickFilter = useCallback((e) => {
-    setQuickFilter(e.target.value);
-    gridRef.current?.api?.setGridOption("quickFilterText", e.target.value);
+    const v = e.target.value;
+    setQuickFilter(v);
+    gridRef.current?.api?.setGridOption("quickFilterText", v);
     setTimeout(() => {
-      if (gridRef.current?.api) {
-        setRowCount(gridRef.current.api.getDisplayedRowCount());
-      }
-    }, 50);
+      if (gridRef.current?.api) setRowCount(gridRef.current.api.getDisplayedRowCount());
+    }, 30);
   }, []);
 
   const onExport = useCallback(() => {
-    gridRef.current?.api?.exportDataAsCsv({ fileName: "transactions-march-2024.csv" });
+    gridRef.current?.api?.exportDataAsCsv({ fileName: "employees-dashboard.csv" });
   }, []);
 
-  const onResetFilters = useCallback(() => {
+  const onReset = useCallback(() => {
     gridRef.current?.api?.setFilterModel(null);
     gridRef.current?.api?.setGridOption("quickFilterText", "");
     setQuickFilter("");
-    setRowCount(transactions.length);
+    setRowCount(employees.length);
   }, []);
 
-  const getRowStyle = useCallback(({ data }) => {
-    if (data?.status === "Failed") return { background: "#fff8f8" };
-    if (data?.status === "Pending") return { background: "#fffdf5" };
-    return {};
-  }, []);
+  const currency = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+
+  const kpiCards = [
+    { label: "Total Payroll", value: currency.format(stats.totalPayroll), grad: "linear-gradient(135deg,#0EA5E9,#2563EB)" },
+    { label: "Active Employees", value: stats.active, grad: "linear-gradient(135deg,#10B981,#059669)" },
+    { label: "Avg Performance", value: stats.avg.toFixed(2), grad: "linear-gradient(135deg,#F59E0B,#F97316)" },
+    { label: "Employees", value: stats.count, grad: "linear-gradient(135deg,#8B5CF6,#7C3AED)" },
+  ];
 
   return (
     <>
-      <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
       <style>{`
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body, #root { width: 100%; min-height: 100vh; background: #f4f3f0; }
-
-        .ag-theme-alpine {
-          --ag-font-family: 'DM Sans', sans-serif;
-          --ag-font-size: 13px;
-          --ag-header-background-color: #f9f8f6;
-          --ag-header-foreground-color: #9ca3af;
-          --ag-background-color: #ffffff;
-          --ag-odd-row-background-color: #fdfdfc;
-          --ag-row-hover-color: #f8f7f4;
-          --ag-selected-row-background-color: #eff6ff;
-          --ag-border-color: #f0ede8;
-          --ag-cell-horizontal-border: none;
-          --ag-header-column-separator-display: block;
-          --ag-header-column-separator-color: #e5e7eb;
-          --ag-row-border-color: #f5f4f1;
-          --ag-cell-horizontal-padding: 14px;
-          --ag-row-height: 56px;
-          --ag-header-height: 44px;
-          --ag-floating-filter-height: 36px;
-          --ag-input-focus-border-color: #6366f1;
-          --ag-range-selection-border-color: #6366f1;
-          --ag-alpine-active-color: #6366f1;
-          --ag-checkbox-checked-color: #6366f1;
-          --ag-border-radius: 0px;
+        body, #root {
+          min-height: 100vh;
+          margin: 0;
+          background: linear-gradient(160deg, #F8FAFC 0%, #EEF2FF 45%, #ECFEFF 100%);
         }
 
-        .ag-theme-alpine .ag-header-cell-label {
-          font-size: 11px;
-          font-weight: 600;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
+        .app {
+          padding: 24px 28px;
+          font-family: Inter, Segoe UI, Arial, sans-serif;
+          color: #0F172A;
         }
 
-        .ag-theme-alpine .ag-floating-filter-input {
-          font-size: 12px;
-          border-radius: 6px;
+        .title {
+          margin-top: 0;
+          margin-bottom: 14px;
+          font-size: 32px;
+          font-weight: 800;
+          letter-spacing: -0.02em;
+          color: #1E1B4B;
         }
 
-        .ag-theme-alpine .ag-root-wrapper {
-          border-radius: 0 0 14px 14px;
-          border: 1px solid #f0ede8;
-          border-top: none;
-          overflow: hidden;
+        .cards {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 14px;
+          margin-bottom: 16px;
         }
 
-        .ag-theme-alpine .ag-paging-panel {
-          border-top: 1px solid #f0ede8;
-          background: #f9f8f6;
-          font-size: 12px;
-          color: #9ca3af;
-          padding: 0 16px;
-        }
-
-        .ag-theme-alpine .ag-sort-indicator-icon {
-          color: #6366f1;
-        }
-
-        .ag-theme-alpine .ag-header-cell:hover {
-          background: #f3f4f6;
-        }
-
-        .kpi-card {
-          background: #fff;
+        .card {
+          color: #fff;
           border-radius: 14px;
-          border: 1px solid #f0ede8;
-          padding: 18px 20px;
-          position: relative;
-          overflow: hidden;
+          padding: 14px 16px;
+          box-shadow: 0 10px 20px rgba(15, 23, 42, 0.12);
+          transition: transform .15s ease;
         }
+        .card:hover { transform: translateY(-2px); }
+        .label { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; opacity: .9; margin-bottom: 6px; }
+        .value { font-size: 24px; font-weight: 800; }
 
-        .kpi-accent {
-          position: absolute;
-          top: 0; left: 0;
-          width: 3px; height: 100%;
-          border-radius: 14px 0 0 14px;
-        }
-
-        .toolbar-btn {
-          height: 36px;
-          padding: 0 14px;
-          border-radius: 8px;
-          border: 1px solid #e5e7eb;
-          background: #fff;
-          font-family: 'DM Sans', sans-serif;
-          font-size: 12.5px;
-          font-weight: 500;
-          color: #374151;
-          cursor: pointer;
+        .toolbar {
           display: flex;
           align-items: center;
-          gap: 6px;
-          white-space: nowrap;
-          transition: background 0.12s, border-color 0.12s;
+          gap: 10px;
+          background: #FFFFFF;
+          border: 1px solid #DDE5F5;
+          border-bottom: none;
+          border-radius: 12px 12px 0 0;
+          padding: 10px;
         }
-        .toolbar-btn:hover { background: #f9f8f6; border-color: #d1d5db; }
-        .toolbar-btn.primary { background: #111827; color: #fff; border-color: #111827; }
-        .toolbar-btn.primary:hover { background: #1f2937; }
+        .input {
+          height: 38px;
+          min-width: 280px;
+          border: 1px solid #CBD5E1;
+          border-radius: 10px;
+          padding: 0 12px;
+          outline: none;
+        }
+        .input:focus {
+          border-color: #6366F1;
+          box-shadow: 0 0 0 3px rgba(99,102,241,.16);
+        }
+
+        .btn {
+          height: 38px;
+          border: 0;
+          border-radius: 10px;
+          padding: 0 14px;
+          cursor: pointer;
+          font-weight: 700;
+          color: #fff;
+        }
+        .btn.reset { background: linear-gradient(135deg,#FB7185,#F43F5E); }
+        .btn.dark { background: linear-gradient(135deg,#4F46E5,#7C3AED); }
+
+        .ag-theme-quartz {
+          --ag-font-family: Inter, Segoe UI, Arial, sans-serif;
+          --ag-font-size: 13px;
+          --ag-row-height: 48px; 
+          --ag-header-height: 44px; 
+          --ag-floating-filter-height: 34px; 
+          --ag-border-color: #DDE5F5;
+          --ag-header-background-color: #EEF2FF;
+          --ag-odd-row-background-color: #F8FAFC;
+          --ag-row-hover-color: #E0E7FF;
+          --ag-selected-row-background-color: #DDD6FE;
+          --ag-accent-color: #6366F1;
+        }
+
+        .ag-theme-quartz .ag-root-wrapper {
+          border: 1px solid #DDE5F5;
+          border-top: none;
+          border-radius: 0 0 12px 12px;
+          overflow: hidden;
+          box-shadow: 0 10px 24px rgba(79,70,229,.12);
+        }
+
+        .ag-theme-quartz .ag-header-cell-label {
+          font-size: 11px;
+          font-weight: 800;
+          letter-spacing: .08em;
+          text-transform: uppercase;
+          color: #312E81;
+        }
       `}</style>
 
-      <div style={{ fontFamily: "'DM Sans', sans-serif", minHeight: "100vh", background: "#f4f3f0", padding: "28px 32px" }}>
+      <div className="app">
+        <h1 className="title">Employee Dashboard</h1>
 
-        {/* Header */}
-        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: 24 }}>
-          <div>
-            <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.14em", color: "#9ca3af", textTransform: "uppercase", marginBottom: 4 }}>
-              March 2024 · Finance
-            </div>
-            <h1 style={{ fontSize: 28, fontWeight: 600, color: "#111827", letterSpacing: "-0.025em" }}>
-              Transaction Ledger
-            </h1>
-          </div>
-          <div style={{ fontSize: 12, color: "#9ca3af" }}>
-            
-          </div>
-        </div>
-
-        {/* KPI Cards */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14, marginBottom: 24 }}>
-          {([
-            { label: "Total Inflow",    value: fmt(stats.income),  accent: "#22c55e", sub: "Revenue & receipts" },
-            { label: "Total Outflow",   value: fmt(stats.expense), accent: "#ef4444", sub: "Expenses & costs" },
-            { label: "Net Position",    value: fmt(stats.net),     accent: "#6366f1", sub: "Positive cash flow" },
-            { label: "Transactions",    value: stats.count,        accent: "#f59e0b", sub: `${rowCount} visible` },
-          ]).map((c) => (
-            <div key={c.label} className="kpi-card">
-              <div className="kpi-accent" style={{ background: c.accent }} />
-              <div style={{ fontSize: 11, fontWeight: 600, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8 }}>{c.label}</div>
-              <div style={{ fontSize: 22, fontWeight: 600, color: "#111827", letterSpacing: "-0.03em", marginBottom: 4 }}>{c.value}</div>
-              <div style={{ fontSize: 12, color: "#d1d5db" }}>{c.sub}</div>
+        <div className="cards">
+          {kpiCards.map((card) => (
+            <div className="card" style={{ background: card.grad }} key={card.label}>
+              <div className="label">{card.label}</div>
+              <div className="value">{card.value}</div>
             </div>
           ))}
         </div>
 
-        {/* Toolbar */}
-        <div style={{
-          display: "flex", alignItems: "center", gap: 10,
-          background: "#fff",
-          border: "1px solid #f0ede8",
-          borderBottom: "none",
-          borderRadius: "14px 14px 0 0",
-          padding: "12px 16px",
-          flexWrap: "wrap",
-        }}>
-          {/* Quick search */}
-          <div style={{ position: "relative", flex: "1 1 220px", minWidth: 180 }}>
-            <span style={{ position: "absolute", left: 10, top: "50%", transform: "translateY(-50%)", fontSize: 14, color: "#9ca3af" }}>⌕</span>
-            <input
-              value={quickFilter}
-              onChange={onQuickFilter}
-              placeholder="Quick search all columns…"
-              style={{
-                width: "100%", height: 36,
-                paddingLeft: 30, paddingRight: 12,
-                borderRadius: 8, border: "1px solid #e5e7eb",
-                background: "#f9f8f6", fontSize: 13,
-                color: "#374151", outline: "none",
-                fontFamily: "'DM Sans', sans-serif",
-              }}
-            />
-          </div>
-
-          <div style={{ height: 24, width: 1, background: "#e5e7eb", flexShrink: 0 }} />
-
-          <button className="toolbar-btn" onClick={onResetFilters}>
-            ↺ Reset Filters
-          </button>
-
-          <button className="toolbar-btn primary" onClick={onExport}>
-            ↓ Export CSV
-          </button>
-
-          <div style={{ marginLeft: "auto", fontSize: 12, color: "#9ca3af", whiteSpace: "nowrap" }}>
-            {rowCount} of {stats.count} rows
-          </div>
+        <div className="toolbar">
+          <input className="input" value={quickFilter} onChange={onQuickFilter} placeholder="Quick search..." />
+          <button className="btn reset" onClick={onReset}>Reset Filters</button>
+          <button className="btn dark" onClick={onExport}>Export CSV</button>
+          <div style={{ marginLeft: "auto", color: "#334155", fontSize: 12, fontWeight: 600 }}>{rowCount} / {stats.count} rows</div>
         </div>
 
-        {/* AG Grid */}
-        <div className="ag-theme-quartz" style={{ height: 540, width: "100%", minHeight: 540 }}>
+        <div className="ag-theme-quartz" style={{ height: 350, width: "100%" }}>
           <AgGridReact
             ref={gridRef}
-            rowData={transactions}
+            rowData={employees}
             columnDefs={columnDefs}
             defaultColDef={defaultColDef}
-            pagination={true}
+            pagination
             paginationPageSize={10}
             paginationPageSizeSelector={[10, 20]}
-            animateRows={true}
+            animateRows
             rowSelection={{ mode: "multiRow" }}
-            getRowStyle={getRowStyle}
             onFilterChanged={onFilterChanged}
-            enableCellTextSelection={true}
+            enableCellTextSelection
           />
-        </div>
-
-        <div style={{ marginTop: 12, fontSize: 11.5, color: "#c9c7c0", textAlign: "center" }}>
-          
         </div>
       </div>
     </>
